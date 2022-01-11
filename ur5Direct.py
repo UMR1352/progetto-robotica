@@ -1,8 +1,9 @@
 import numpy as np
-from numpy import cos, sin, pi
+from numpy import cos, sin
 
 A = [0, -0.425, -0.3922, 0, 0, 0]
 D = [0.1625, 0, 0, 0.1333, 0.0997, 0.0996]
+
 
 def ur5Direct(Th):
     T10f = np.matrix([[cos(Th[0]), -sin(Th[0]), 0, 0],
@@ -19,8 +20,8 @@ def ur5Direct(Th):
                       [0, 0, 0, 1]])
     T43f = np.matrix([[cos(Th[3]), -sin(Th[3]), 0, A[2]],
                       [sin(Th[3]), cos(Th[3]), 0, 0],
-                      [0, 0, 1, D[3]], 
-                      [0, 0, 0, 1]]) 
+                      [0, 0, 1, D[3]],
+                      [0, 0, 0, 1]])
     T54f = np.matrix([[cos(Th[4]), -sin(Th[4]), 0, 0],
                       [0, 0, -1, -D[4]],
                       [sin(Th[4]), cos(Th[4]), 0, 0],
@@ -31,4 +32,4 @@ def ur5Direct(Th):
                       [0, 0, 0, 1]])
     T06 = T10f * T21f * T32f * T43f * T54f * T65f
 
-    return T06[0:2, 3], T06[0:2, 0:2]
+    return T06[0:3, 3], T06[0:3, 0:3]
